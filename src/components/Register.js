@@ -2,7 +2,7 @@ import React from 'react';
 import useRegister from '../hooks/useRegister';
 
 export default () => {
-    const [setUsername, setEmail, setPassword, setConfirmPassword, message, submitRegister ] = useRegister();
+    const [setUsername, setEmail, setPassword, setConfirmPassword, setRole, message, submitRegister ] = useRegister();
 
     return (
         <>
@@ -41,6 +41,18 @@ export default () => {
                             setConfirmPassword(event.target.value);
                         }}
                     />
+                    <select
+                        name="role"
+                        id="role"
+                        placeholder="Select Option"
+                        onChange={event => {
+                            alert(event.target.value);
+                            setRole(event.target.value);
+                        }}
+                    >
+                        <option value="ROLE_VOLUNTEER" key="ROLE_VOLUNTEER" >I want to help.</option>
+                        <option value="ROLE_NEEDY" key="ROLE_NEEDY" >I need help.</option>
+                    </select>
                     {message ? <p className="message">{message}</p> : null}
                     <button type="submit">Register</button>
                 </form>

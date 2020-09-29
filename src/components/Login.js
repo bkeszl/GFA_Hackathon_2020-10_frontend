@@ -2,7 +2,7 @@ import React from 'react';
 import useLogin from '../hooks/useLogin';
 
 export default () => {
-    const [ username, setUsername, setPassword, error, submitLogin ] = useLogin();
+    const [username, setUsername, setPassword, message, submitLogin ] = useLogin();
 
     return (
         <>
@@ -26,7 +26,7 @@ export default () => {
                             setPassword(event.target.value);
                         }}
                     />
-                    {error ? <p className="error-message">{error}</p> : null}
+                    {message ? <p className="error-message">{message}</p> : null}
                     <button type="submit">Sign in</button>
                 </form>
             </div>
