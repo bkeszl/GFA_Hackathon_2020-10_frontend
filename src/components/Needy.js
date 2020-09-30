@@ -1,18 +1,31 @@
 import React, {useEffect, useState} from "react";
 import useRequest from "../hooks/useRequest";
 import useNeedy from "../hooks/useNeedy";
+import Map from "./Map";
+import WrappedMap from "./WrappedMap";
 
 export default function () {
 
     const [requestWithToken] = useRequest();
     const [tasks, setTasks] = useState([]);
-    const [setName, setCategoryType, setDescription, setFromDate, setToDate, submitAddTask] = useNeedy();
+    const [location, setLocation] = useState({});
+    const [
+        setName,
+        setCategoryType,
+        setDescription,
+        setFromDate,
+        setToDate,
+        volunteers,
+        setVolunteers,
+        submitAddTask,
+        setVolunteersFromTasks] = useNeedy();
 
     useEffect(() => {
         requestWithToken("GET", "/my-tasks")
             .then(response => {
                 console.log(response);
                 setTasks(response.taskList);
+                setVolunteers(setVolunteersFromTasks(response.taskList));
             })
     }, []);
 
@@ -87,6 +100,14 @@ export default function () {
                             {task.sender.username} - {task.sender.email}<br/>
                             {convertToDate(task.fromDate)} - {convertToDate(task.toDate)}</h4>
                         <p>{task.description}</p>
+                    </div>
+                ))}
+            </div>
+            <div>
+                <h2>Give Feedbacks</h2>
+                {volunteers.map((volunteer) => (
+                    <div key={volunteer.id}>
+                        <h3>{volunteer.username}</h3>
                     </div>
                 ))}
             </div>

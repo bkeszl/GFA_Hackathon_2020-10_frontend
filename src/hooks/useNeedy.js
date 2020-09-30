@@ -7,6 +7,7 @@ export default function () {
     const [description, setDescription] = useState();
     const [fromDate, setFromDate] = useState();
     const [toDate, setToDate] = useState();
+    const [volunteers, setVolunteers] = useState([]);
     const [requestWithToken] = useRequest();
 
     function submitAddTask() {
@@ -23,15 +24,27 @@ export default function () {
                 y: 0,
             },
         }
-        console.log(data);
         requestWithToken("POST", "/needy/task", data)
             .then((response) => {
-                alert(response.data)
             })
             .catch(error => {
-                alert(error.response.data)
             });
     }
 
-    return [setName, setCategoryType, setDescription, setFromDate, setToDate, submitAddTask];
+    function setVolunteersFromTasks(tasks) {
+        let volunteersArray = [];
+        if (tasks[0].applier.id) {
+            volunteersArray.push(tasks[0].applier);
+        }
+        let ids = [];
+        tasks.forEach(task => {
+            ids.push(task.applier.id);
+            if (!ids.includes(task.applier.id)) {
+                volunteersArray.push(task.applier);
+            }
+        });
+        return volunteersArray;
+    }
+
+    return [setName, setCategoryType, setDescription, setFromDate, setToDate, volunteers, setVolunteers, submitAddTask, setVolunteersFromTasks];
 }
