@@ -14,8 +14,9 @@ export default () => {
                 method,
                 url: endPoint,
                 headers: {
+                    'Accept': 'application/json',
                     'Authorization': `Bearer ${authFromRedux.token}`,
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json;charset=UTF-8',
                 },
                 data,
             })

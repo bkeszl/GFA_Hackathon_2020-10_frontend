@@ -6,7 +6,7 @@ import {logIn} from '../actions';
 export default function () {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState();
+    const [message, setMessage] = useState();
     const dispatch = useDispatch();
 
     function submitLogin(event) {
@@ -19,18 +19,19 @@ export default function () {
                 )
                 .then(response => {
                     if (response.data.token !== undefined) {
-                        dispatch(logIn(username, response.data.token));
+                        dispatch(logIn(username, response.data.token, response.data.role));
                     } else {
-                        setError(response.data.message);
+                        setMessage(response.data.message);
                     }
                 })
-                .catch(errorResp => {
-                    setError(errorResp.message);
+                .catch(error => {
+                    console.log(error.response.data.message);
+                    setMessage(error.response.data.message);
                 });
         } else {
-            setError('All the input fields are required.');
+            setMessage('All the input fields are required.');
         }
     }
 
-    return [username, setUsername, setPassword, error, submitLogin];
+    return [username, setUsername, setPassword, message, submitLogin];
 }
