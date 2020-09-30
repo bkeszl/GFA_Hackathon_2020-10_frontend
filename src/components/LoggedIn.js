@@ -5,7 +5,7 @@ import Needy from "./Needy";
 
 export default function() {
     const dispatch = useDispatch();
-    const userFromRedux = useSelector(state => state.auth);
+    const userFromRedux = useSelector(state => state.redux);
     return (
         <>
             <h1>LizarDOS - help the needy</h1>

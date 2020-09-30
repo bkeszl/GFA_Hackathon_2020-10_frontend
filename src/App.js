@@ -5,7 +5,7 @@ import {useSelector} from "react-redux";
 import Lounge from "./components/Lounge";
 
 export default function App() {
-    const userFromRedux = useSelector(state => state.auth);
+    const userFromRedux = useSelector(state => state.redux);
     useEffect(()=>{},
         [userFromRedux.isLoggedIn]);
 

@@ -3,7 +3,7 @@ import axios from "axios";
 import {logOut} from "../actions";
 
 export default () => {
-    const authFromRedux = useSelector(state => state.auth);
+    const authFromRedux = useSelector(state => state.redux);
     const dispatch = useDispatch();
     function requestWithToken(method, endPoint, data) {
         if (authFromRedux.isLoggedIn) {

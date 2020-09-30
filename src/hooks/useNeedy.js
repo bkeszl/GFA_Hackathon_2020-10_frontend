@@ -32,19 +32,16 @@ export default function () {
     }
 
     function setVolunteersFromTasks(tasks) {
-        let volunteersArray = [];
-        if (tasks[0].applier.id) {
-            volunteersArray.push(tasks[0].applier);
-        }
-        let ids = [];
-        tasks.forEach(task => {
-            ids.push(task.applier.id);
-            if (!ids.includes(task.applier.id)) {
-                volunteersArray.push(task.applier);
-            }
-        });
-        return volunteersArray;
-    }
+      let volunteersArray = [];
+      let ids = [];
+      tasks.forEach(task => {
+          if (task.applier.id !== null && !ids.includes(task.applier.id)) {
+              volunteersArray.push(task.applier);
+              ids.push(task.applier.id);
+          }
+      });
+      return volunteersArray;
+  }
 
     return [setName, setCategoryType, setDescription, setFromDate, setToDate, volunteers, setVolunteers, submitAddTask, setVolunteersFromTasks];
 }
