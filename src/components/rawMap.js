@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import './App.css';
 import { GoogleMap, withScriptjs, withGoogleMap, Marker, InfoWindow } from "react-google-maps";
-import * as data from './data/data.json'
-import mapStyles from "./mapStyles"
 
 function Map() {
     const [selectedMarker, setSelectedMarker] = useState(null);
@@ -14,27 +11,12 @@ function Map() {
                 lat: 0,
                 lng: 0
             }}
-            defaultOptions={{ styles: mapStyles }}
             onClick={(event) => {setSelectedCoordinate(current => [...current, {
                 lat: event.latLng.lat(),
                 lng: event.latLng.lng()
             }])}}
         >
-            {data.markers.map((marker) => (
-                <Marker
-                    key={marker.id}
-                    position={{
-                        lat: marker.x,
-                        lng: marker.y
-                    }}
-                    onClick={() => {
-                        setSelectedMarker(marker);
-                    }}
-                    icon={{
-                        url: '/coronavirus.svg',
-                        scaledSize: new window.google.maps.Size(50, 50)
-                    }} />
-            ))}
+
             {selectedMarker && (
                 <InfoWindow
                     position={{
@@ -106,7 +88,7 @@ export default () => {
     return (
         <div style={{ width: '100vh', height: '100vh' }} className="App">
             <WrappedMap
-                googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`}
+                googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places`}
                 loadingElement={<div style={{ height: '100%' }} />}
                 containerElement={<div style={{ height: '100%' }} />}
                 mapElement={<div style={{ height: '100%' }} />}

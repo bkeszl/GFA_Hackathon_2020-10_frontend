@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from "react";
 import useRequest from "../hooks/useRequest";
 import useNeedy from "../hooks/useNeedy";
-import Map from "./Map";
-import WrappedMap from "./WrappedMap";
+import RawMap from "./RawMap"
 
 export default function () {
 
@@ -38,6 +37,7 @@ export default function () {
 
     return (
         <>
+            <RawMap/>
             <div className="small-form">
                 <h2>Make a new task</h2>
                 <form onSubmit={(event) => {
