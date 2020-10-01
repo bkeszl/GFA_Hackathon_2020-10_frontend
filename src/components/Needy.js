@@ -9,7 +9,6 @@ export default function () {
     const [tasks, setTasks] = useState([]);
     const [userAddress, setUserAddress] = useState();
 
-    const [location, setLocation] = useState({});
     const [
         setName,
         setCategoryType,
@@ -21,7 +20,8 @@ export default function () {
         submitFeedback,
         receiverId, setReceiverId,
         message, setMessage,
-        rating, setRating
+        rating, setRating,
+        newTaskMessage, feedbackMessage, location, setLocation
     ] = useNeedy();
     const userFromRedux = useSelector((state) => state.redux);
 
@@ -31,7 +31,7 @@ export default function () {
             setTasks(response.taskList);
             setVolunteers(setVolunteersFromTasks(response.taskList));
         });
-    }, []);
+    }, [newTaskMessage]);
 
     useEffect(() => {
         setLocation({lat: userFromRedux.lat, lng: userFromRedux.lng});
@@ -68,14 +68,7 @@ export default function () {
             lng: position.coords.longitude,
         });
     };
-    const reverseGeocodeCoordinates = () => {
-        fetch(
-            `https://us1.locationiq.com/v1/reverse.php?key=fc48b0dd35c2c8&format=json&lat=${location.latitude}&lon=${location.longitude}`
-        )
-            .then((response) => response.json())
-            .then((data) => setUserAddress(data.display_name))
-            .catch((error) => alert(error));
-    };
+
     const showError = (error) => {
         switch (error.code) {
             case error.PERMISSION_DENIED:
@@ -98,10 +91,10 @@ export default function () {
     return (
         <>
             <div className={"wrapper"}>
-                <RawMap location={location}/>
                 <div className={"fifty"}>
                     <div className="small-form">
                         <h2>Make a new task</h2>
+                        <p>{newTaskMessage ? newTaskMessage : null}</p>
                         <form
                             onSubmit={(event) => {
                                 submitAddTask(event);
@@ -167,6 +160,7 @@ export default function () {
                         </form>
                     </div>
                 </div>
+                <RawMap location={location}/>
             </div>
             <div className={"wrapper"}>
                 <h2>My tasks</h2>
@@ -188,7 +182,9 @@ export default function () {
             </div>
             <div className={"wrapper"}>
                 <h2>Give Feedbacks</h2>
-                        <form
+                <p>{feedbackMessage ? feedbackMessage : null}</p>
+
+                <form
                             onSubmit={(event) => {
                                 submitFeedback(event);
                             }}

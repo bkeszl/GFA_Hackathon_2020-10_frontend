@@ -19,7 +19,7 @@
     "redux": "^4.0.5",
     "redux-persist": "^6.0.0"
   },
-  "proxy": "http://localhost:8080",
+  "proxy": "http://hackathonbackend2-env.eba-sh3hk2ci.eu-central-1.elasticbeanstalk.com",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

@@ -18,10 +18,10 @@ function Map(props) {
   const dispatch = useDispatch();
   return (
     <GoogleMap
-      defaultZoom={10}
+      defaultZoom={15}
       defaultCenter={{
-        lat: props.location.lat ? props.location.lat : 0,
-        lng: props.location.lng ? props.location.lng : 0,
+        lat: props.location.lat ? props.location.lat : 47.497913,
+        lng: props.location.lng ? props.location.lng : 19.040236,
       }}
       onClick={(event) => {
         dispatch(getNeedyLocation(event.latLng.lat(), event.latLng.lng()));

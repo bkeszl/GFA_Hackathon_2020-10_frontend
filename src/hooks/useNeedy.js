@@ -11,6 +11,9 @@ export default function () {
     const [receiverId, setReceiverId] = useState();
     const [message, setMessage] = useState();
     const [rating, setRating] = useState();
+    const [newTaskMessage, setNewTaskMessage] = useState();
+    const [feedbackMessage, setFeedbackMessage] = useState();
+    const [location, setLocation] = useState({});
     const [requestWithToken] = useRequest();
 
     function submitAddTask(event) {
@@ -24,14 +27,16 @@ export default function () {
             toDate: toDateTimeStamp,
             fromDate: fromDateTimeStamp,
             location: {
-                x: 0,
-                y: 0,
+                x: location.lng,
+                y: location.lat,
             },
         }
         requestWithToken("POST", "/needy/task", data)
             .then((response) => {
+                setNewTaskMessage('Task posted.');
             })
             .catch(error => {
+                setNewTaskMessage('Task adding failed.');
             });
     }
 
@@ -56,8 +61,10 @@ export default function () {
       }
       requestWithToken("POST", "/feedback", data)
           .then((response) => {
+              setFeedbackMessage('Feedback posted.');
           })
           .catch(error => {
+              setFeedbackMessage('Adding feedback failed.');
           });
   }
 
@@ -72,6 +79,7 @@ export default function () {
         submitFeedback,
         receiverId, setReceiverId,
         message, setMessage,
-        rating, setRating
+        rating, setRating,
+        newTaskMessage, feedbackMessage, location, setLocation
     ];
 }

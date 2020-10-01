@@ -21,7 +21,9 @@ export default () => {
                 data,
             })
                 .then(response => response.data)
-                .catch(() => dispatch(logOut()));
+                .catch(() => {
+                    //dispatch(logOut())
+                });
         }
         return undefined;
     }

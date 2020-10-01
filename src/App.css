@@ -56,6 +56,7 @@ button {
 
 .floatRight {
   float: right;
+  margin-right: 0;
 }
 
 .small-form {
@@ -81,7 +82,7 @@ button {
   float: left;
   padding: 2vw;
   color: #F2EBD5;
-  margin: 0 4vw 4vw 0;
+  margin: 0 4vw 2vw 0;
   border-radius: .7vw;
 }
 .task:nth-child(4n+1) {
@@ -102,16 +103,24 @@ button {
 }
 .task.DONE {
   background-color: #52F28A;
-  color: #2a4466;
+  color: #3f6699;
 }
 .task.DONE h3 {
-  color: #2a4466;
+  color: #3f6699;
 }
 
 .task.feedback {
   background-color: #5990D9;
   height: 6vw;
 }
+
+.task button {
+  background-color: #F2EBD5;
+  color: #5990D9;
+  padding: 0.4vw;
+  float:right;
+}
+
 
 p.lead {
   font-weight: 700;
@@ -120,15 +129,33 @@ p.lead {
 p.description {
   font-size: 1vw;
 }
-p.stars {
-  font-size: 3vw;
-  line-height: 4vw;
-  margin: 0;
-  letter-spacing: .7vw;
-  cursor: pointer;
+
+.volunteer h3 {
+  line-height: 1.4vw;
 }
 
-p.stars span:hover {
-  color: #faf3dc;
+.volunteer p {
+  margin-top: .7vw;
+  margin-bottom: 0vw;
+}
+
+.volunteer .task {
+  position: relative;
+}
+.volunteer button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.marginbottom {
+  margin-bottom: 2vw;
+}
+
+.infoInner h3 {
+  font-size: 1.4vw;
+}
+.infoInner {
+  font-size: 1vw;
 }
 
