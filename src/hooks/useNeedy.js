@@ -8,9 +8,13 @@ export default function () {
     const [fromDate, setFromDate] = useState();
     const [toDate, setToDate] = useState();
     const [volunteers, setVolunteers] = useState([]);
+    const [receiverId, setReceiverId] = useState();
+    const [message, setMessage] = useState();
+    const [rating, setRating] = useState();
     const [requestWithToken] = useRequest();
 
-    function submitAddTask() {
+    function submitAddTask(event) {
+        event.preventDefault();
         let toDateTimeStamp = Date.parse(toDate);
         let fromDateTimeStamp = Date.parse(fromDate);
         const data = {
@@ -35,7 +39,7 @@ export default function () {
       let volunteersArray = [];
       let ids = [];
       tasks.forEach(task => {
-          if (task.applier.id !== null && !ids.includes(task.applier.id)) {
+          if (task.applier !== null && !ids.includes(task.applier.id)) {
               volunteersArray.push(task.applier);
               ids.push(task.applier.id);
           }
@@ -43,5 +47,31 @@ export default function () {
       return volunteersArray;
   }
 
-    return [setName, setCategoryType, setDescription, setFromDate, setToDate, volunteers, setVolunteers, submitAddTask, setVolunteersFromTasks];
+  function submitFeedback(event) {
+        event.preventDefault();
+      const data = {
+          receiverId,
+          message,
+          rating,
+      }
+      requestWithToken("POST", "/feedback", data)
+          .then((response) => {
+          })
+          .catch(error => {
+          });
+  }
+
+    return [
+        setName,
+        setCategoryType,
+        setDescription,
+        setFromDate, setToDate,
+        volunteers, setVolunteers,
+        submitAddTask,
+        setVolunteersFromTasks,
+        submitFeedback,
+        receiverId, setReceiverId,
+        message, setMessage,
+        rating, setRating
+    ];
 }

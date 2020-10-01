@@ -6,7 +6,7 @@ export default () => {
 
     return (
         <>
-            <div className="small-form">
+            <div className="small-form fifty">
                 <h2>Login</h2>
                 <form onSubmit={event => submitLogin(event)}>
                     <input

@@ -63,7 +63,7 @@ const WrappedMap = withScriptjs(withGoogleMap(Map));
 export default (props) => {
  
   return (
-    <div style={{ width: "100vh", height: "100vh" }} className="App">
+    <div className="Map fifty">
       <WrappedMap location={props.location}
         googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places`}
         loadingElement={<div style={{ height: "100%" }} />}

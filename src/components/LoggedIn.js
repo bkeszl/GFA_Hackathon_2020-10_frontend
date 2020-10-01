@@ -8,8 +8,7 @@ export default function() {
     const userFromRedux = useSelector(state => state.redux);
     return (
         <>
-            <h1>LizarDOS - help the needy</h1>
-            <button onClick={() => dispatch(logOut())}>logout</button>
+            <button className={"floatRight"} onClick={() => dispatch(logOut())}>logout</button>
             {(userFromRedux.role === 'ROLE_VOLUNTEER') ? <h2>volunteer</h2> :null}
             {(userFromRedux.role === 'ROLE_NEEDY') ? <Needy /> :null}
             </>
