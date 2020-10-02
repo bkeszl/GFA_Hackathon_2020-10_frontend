@@ -12,7 +12,7 @@ export default () => {
             }
             return axios({
                 method,
-                url: 'http://hackathonbackend2-env.eba-sh3hk2ci.eu-central-1.elasticbeanstalk.com'+endPoint,
+                url: 'http://hackathonbackend2-env.eba-sh3hk2ci.eu-central-1.elasticbeanstalk.com'+ endPoint,
                 headers: {
                     'Accept': 'application/json',
                     'Authorization': `Bearer ${authFromRedux.token}`,
