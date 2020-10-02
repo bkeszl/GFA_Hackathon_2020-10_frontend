@@ -1,11 +1,17 @@
 import React from 'react';
-import Cohorts from "./Cohorts";
+import {useDispatch, useSelector} from "react-redux";
+import {logOut} from "../actions";
+import Needy from "./Needy";
+import Volunteer from "./Volunteer";
 
-export default function(props) {
+export default function () {
+    const dispatch = useDispatch();
+    const userFromRedux = useSelector(state => state.redux);
     return (
         <>
-            <h1>LizarDOS green_brother_app</h1>
-            <Cohorts />
+            <button className={"floatRight"} onClick={() => dispatch(logOut())}>logout</button>
+            {(userFromRedux.role === 'ROLE_VOLUNTEER') ? <Volunteer /> : null}
+            {(userFromRedux.role === 'ROLE_NEEDY') ? <Needy/> : null}
         </>
     );
 }

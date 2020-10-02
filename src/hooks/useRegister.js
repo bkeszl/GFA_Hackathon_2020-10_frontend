@@ -5,13 +5,14 @@ export default function () {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [role, setRole] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [message, setMessage] = useState('');
 
     function submitRegister(event) {
         event.preventDefault();
         setMessage('');
-        if ((username !== '' && email !== ''&& password !== '')) {
+        if (!(username !== '' && email !== ''&& password !== '')) {
             setMessage('All the input fields are required. ');
         }
         if (email.includes('@') && email.includes('.') && email.length < 6) {
@@ -24,26 +25,26 @@ export default function () {
             axios
                 .post(`
                 /register`,
-                    {username, email, password,}
+                    {username, email, password, role}
                 )
                 .then(response => {
                     if (!!response.data.id &&
                         !!response.data.username &&
-                        !!response.data.email &&
-                        !!response.data.verified &&
-                        !!response.data.avatar) {
+                        !!response.data.email
+                        ) {
                         setMessage("Registration was succesful.")
                     } else {
                         setMessage(response.data.message);
                     }
                 })
-                .catch(errorResp => {
-                    setMessage(errorResp.message);
+                .catch(error => {
+                    console.log(error.response.data.message);
+                    setMessage(error.response.data.message);
                 });
         } else {
             setMessage('All the input fields are required.');
         }
     }
 
-    return [setUsername, setEmail, setPassword, setConfirmPassword, message, submitRegister];
+    return [setUsername, setEmail, setPassword, setConfirmPassword, setRole, message, submitRegister ];
 }

@@ -3,7 +3,7 @@ import axios from "axios";
 import {logOut} from "../actions";
 
 export default () => {
-    const authFromRedux = useSelector(state => state.auth);
+    const authFromRedux = useSelector(state => state.redux);
     const dispatch = useDispatch();
     function requestWithToken(method, endPoint, data) {
         if (authFromRedux.isLoggedIn) {
@@ -12,15 +12,18 @@ export default () => {
             }
             return axios({
                 method,
-                url: endPoint,
+                url: 'http://hackathonbackend2-env.eba-sh3hk2ci.eu-central-1.elasticbeanstalk.com'+endPoint,
                 headers: {
+                    'Accept': 'application/json',
                     'Authorization': `Bearer ${authFromRedux.token}`,
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json;charset=UTF-8',
                 },
                 data,
             })
                 .then(response => response.data)
-                .catch(() => dispatch(logOut()));
+                .catch(() => {
+                    //dispatch(logOut())
+                });
         }
         return undefined;
     }
