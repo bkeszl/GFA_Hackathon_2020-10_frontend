@@ -24,7 +24,7 @@ export default function () {
         if (message === '') {
             axios
                 .post(`
-                /register`,
+                http://hackathonbackend2-env.eba-sh3hk2ci.eu-central-1.elasticbeanstalk.com//register`,
                     {username, email, password, role}
                 )
                 .then(response => {
